@@ -11,19 +11,19 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 public class HelloController {
 
-	@RequestMapping(value = "host/hello", method = RequestMethod.GET)
+	@RequestMapping(value = "/hello", method = RequestMethod.GET)
 	@ResponseBody
 	public String hello(@RequestParam(value = "message", defaultValue = "Hello Spring") String message) {
 		return "Your message: " + message;
 	}
 
-	@RequestMapping(value = "host/hello2", method = RequestMethod.POST)
+	@RequestMapping(value = "/hello2", method = RequestMethod.POST)
 	@ResponseBody
 	public String hello2(@RequestBody String message) {
 		return "Your message: " + message;
 	}
 
-	@RequestMapping(value = "host/hello3/{message}", method = RequestMethod.PUT)
+	@RequestMapping(value = "/hello3/{message}", method = RequestMethod.PUT)
 	@ResponseBody
 	public String hello3(@PathVariable String message) {
 		return "Your message: " + message;
