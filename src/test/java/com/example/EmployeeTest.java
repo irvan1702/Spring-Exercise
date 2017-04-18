@@ -25,9 +25,16 @@ public class EmployeeTest {
 
 	@Test
 	public void getEmployeeMethod2() throws Exception {
-		this.mockMvc
-				.perform(post("/employee2").content("{\"name\":\"Alice\",\"gender\":\"Female\"}")
-						.contentType("application/json"))
-				.andExpect(status().isOk());
+		this.mockMvc.perform(post("/employee2")
+				.content("{\"name\":\"Alice\",\"gender\":\"Female\"}")
+				.contentType("application/json")).andExpect(status().isOk());
 	}
+	
+	@Test
+	public void getEmployeeMethod3() throws Exception {
+		this.mockMvc.perform(get("/employee3/1"))
+				.andExpect(content().json("{\"name\":\"John\",\"gender\":\"male\"};"));
+	}
+	
+	
 }

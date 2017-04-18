@@ -6,6 +6,7 @@ import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -18,8 +19,8 @@ public class EmployeeController {
 	
 	public EmployeeController(){
 		this.employees = new ArrayList<Employee>();
-		this.employees.add(new Employee("John","male"));
-		this.employees.add(new Employee("Jane","female"));
+		this.employees.add(new Employee("1","John","male"));
+		this.employees.add(new Employee("2","Jane","female"));
 	}
 	@RequestMapping(value = "/employee", method = RequestMethod.GET)
 	@ResponseBody
@@ -33,5 +34,17 @@ public class EmployeeController {
 	public Employee getEmployee2(@RequestBody Employee emp) {
 		this.employees.add(emp);
 		return emp;
+	}
+	@RequestMapping(value = "/employee3/{id}", method = RequestMethod.GET)
+	@ResponseBody
+	public Employee getEmployee3(@PathVariable String id) {
+		Employee emp = this.employees.stream().filter(s->s.getId().equalsIgnoreCase(id)).findFirst().orElse(null);
+		if(emp==null){
+			throw new EmployeeNotFoundException();
+		}
+		else{
+			return emp;
+		}
+		
 	}
 }
